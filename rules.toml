@@ -1,0 +1,14 @@
+[backends]
+  [backends.backend1]
+    [backends.backend1.servers]
+    [backends.backend1.servers.api-node]
+      url = "http://1.1.1.1:3000"
+      weight = 0
+
+[frontends]
+  [frontends.frontend1]
+   backend = "backend1"
+   passHostHeader = true
+  [frontends.frontend1.routes]
+  [frontends.frontend1.routes.route-api-node]
+   rule = "Host:api.abcdef.com"

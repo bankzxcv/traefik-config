@@ -1,0 +1,36 @@
+debug = true
+logLevel = "DEBUG"
+defaultEntryPoints = ["http", "https", "bar"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.bar]
+  address = ":8080"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[api]
+entryPoint = "bar"
+dashboard = true
+
+[file]
+watch=true
+filename = "/etc/traefik/rules.toml"
+
+[docker]
+  endpoint = "unix:///var/run/docker.sock"
+  domain = "abcdef.com"
+  watch = true
+  exposedbydefault = true
+
+[acme]
+email = "abcdef@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
